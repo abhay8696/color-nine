@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { getCurrentTime } from "./helperFunctions";
+import { getCountDown } from "./helperFunctions";
 
 function App() {
     const [count, setCount] = useState(0);
-    const [clock, setClock] = useState(getCurrentTime());
+    const [clock, setClock] = useState(getCountDown());
 
     //functions
-    const setTime = () => setClock(getCurrentTime());
+    const setTime = () => setClock(getCountDown());
 
     useEffect(() => {
         const intervalId = setInterval(() => {
