@@ -5,12 +5,15 @@ import TimeButton from "./components/TimeButton/TimeButton";
 
 function App() {
     const [currentWindow, setCurrentWindow] = useState(1);
+    const [oneMinStack, setOneMinStack] = useState([]);
+    const [threeMinStack, setThreeMinStack] = useState([]);
+    const [fiveMinStack, setFiveMinStack] = useState([]);
 
     //functions
     const changeWindow = (num) => setCurrentWindow(num);
     return (
         <div className="h-[100vh] w-[100vw] relative">
-            <div className="rounded-b-[2.5rem] absolute top-0 left-0 right-0 bottom-[40vh] sm:bottom-[50vh] bg-primary-gradient -z-1"></div>
+            {/* <div className="rounded-b-[2.5rem] absolute top-0 left-0 right-0 bottom-[40vh] sm:bottom-[50vh] bg-primary-gradient -z-1"></div> */}
             <h1 className="text-center py-4 mb-4 text-white">COLOR-9 GAME</h1>
             <div className="flex items-center justify-center">
                 <div className="flex items-center justify-center rounded-xl mb-4 bg-white">

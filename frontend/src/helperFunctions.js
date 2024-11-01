@@ -14,12 +14,12 @@ export const getCountDown = (min = 1) => {
     const now = new Date();
 
     // Calculate remaining minutes within the hour (in reverse).
-    // Example: If it's 10:05, 60 - 5 = 55 minutes remaining in the hour.
-    const minutes = 60 - String(now.getMinutes()).padStart(2, "0");
+    // Example: If it's 10:05, 59 - 5 = 54 minutes remaining in the hour.
+    const minutes = 59 - String(now.getMinutes()).padStart(2, "0");
 
     // Calculate remaining seconds within the minute (in reverse).
-    // Example: If it's 10:05:45, 60 - 45 = 15 seconds remaining in the minute.
-    const seconds = 60 - Number(String(now.getSeconds()).padStart(2, "0"));
+    // Example: If it's 10:05:45, 59 - 45 = 14 seconds remaining in the minute.
+    const seconds = 59 - Number(String(now.getSeconds()).padStart(2, "0"));
 
     // Calculate how many minutes are left based on the specified interval `min`.
     // If `min = 1`, this will simply be `minutes % 1 = 0`.
@@ -111,4 +111,53 @@ export const getSeries = (window = 1) => {
     // Concatenate year, month, day, and the padded window count into a single string
     // and return the resulting series.
     return `${year}${month}${day}${window}${windowsSinceMidnight}`;
+};
+
+// Function to generate a random object with properties: num, color, and bigSmall
+export const generateRandom = () => {
+    // Generate a random number between 0 and 9
+    const num = Math.floor(Math.random() * 10);
+
+    // Determine size based on the value of num: "small" if num is less than 5, otherwise "big"
+    const bigSmall = num < 5 ? "small" : "big";
+
+    let color;
+
+    switch (num) {
+        case 0:
+            color = "red-violet";
+            break;
+        case 1:
+            color = "green";
+            break;
+        case 2:
+            color = "red";
+            break;
+        case 3:
+            color = "green";
+            break;
+        case 4:
+            color = "red";
+            break;
+        case 5:
+            color = "green-violet";
+            break;
+        case 6:
+            color = "red";
+            break;
+        case 7:
+            color = "green";
+            break;
+        case 8:
+            color = "red";
+            break;
+        case 9:
+            color = "green";
+            break;
+        default:
+            break;
+    }
+
+    // Return an object containing the randomly generated values
+    return { num, color, bigSmall };
 };

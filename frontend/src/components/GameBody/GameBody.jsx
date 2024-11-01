@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Clock from "../Clock/Clock";
-import { getCountDown, getSeries } from "../../helperFunctions";
+import { generateRandom, getCountDown, getSeries } from "../../helperFunctions";
 import Series from "../Series/Series";
 import ColorButton from "../ColorButton/ColorButton";
 import CoinButton from "../CoinButton/CoinButton";
@@ -15,6 +15,7 @@ import coin_6 from "../../assets/coin6.png";
 import coin_7 from "../../assets/coin7.png";
 import coin_8 from "../../assets/coin8.png";
 import coin_9 from "../../assets/coin9.png";
+import NoClickLayer from "../NoClickLayer/NoClickLayer";
 
 const GameBody = (props) => {
     const { currentWindow, resetTime } = props; //currentWindow = 1/3/5
@@ -43,14 +44,20 @@ const GameBody = (props) => {
         if (
             Number(clock.minutes) === resetTime - 1 &&
             Number(clock.seconds) === 59
-        )
+        ) {
             updateSeries();
+        }
     }, [clock]);
 
     useEffect(() => {
         if (resetTime === currentWindow) hideorShow.current = "block";
         else hideorShow.current = "hidden";
     }, [currentWindow]);
+
+    useEffect(() => {
+        const ro = generateRandom();
+        console.log({ resetTime, series, ...ro });
+    }, [series]);
 
     //functions
     const displayCoins = () => {
@@ -82,7 +89,10 @@ const GameBody = (props) => {
             <h3 className="text-h3">Reset: {resetTime}min</h3>
             <Clock minutes={clock.minutes} seconds={clock.seconds} />
             <Series series={series} />
-            <div className="w-[100%] p-4 flex flex-col gap-4 ">
+            <div className="w-[95%] px-4 py-8 flex flex-col gap-4 bg-white rounded-3xl relative">
+                {Number(clock.seconds) <= 5 && Number(clock.minutes) === 0 ? (
+                    <NoClickLayer seconds={clock.seconds} />
+                ) : null}
                 <div className="flex items-center justify-around w-[100%]">
                     <ColorButton bg="bg-green-500" text="green" color="green" />
                     <ColorButton
@@ -96,10 +106,10 @@ const GameBody = (props) => {
                     {displayCoins()}
                 </div>
                 <div className="uppercase flex justify-center">
-                    <span className="py-4 rounded-l-3xl w-[150px] text-center bg-amber-500">
+                    <span className="py-2 sm:py-4 rounded-l-xl sm:rounded-l-3xl w-[100px] sm:w-[150px] text-center bg-amber-500">
                         Big
                     </span>
-                    <span className="py-4 rounded-r-3xl w-[150px] text-center bg-blue-500">
+                    <span className="py-2 sm:py-4 rounded-r-xl sm:rounded-r-3xl w-[100px] sm:w-[150px] text-center bg-blue-500">
                         Small
                     </span>
                 </div>
