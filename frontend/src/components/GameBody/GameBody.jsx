@@ -41,6 +41,9 @@ const GameBody = (props) => {
 
     //side effects
     useEffect(() => {
+        //load entries from local on 1st reload
+        // updateEntriesFromLocal();
+
         const intervalId_sec = setInterval(() => {
             updateClock();
         }, 1000); // Update every second
@@ -59,7 +62,12 @@ const GameBody = (props) => {
         //when series end (clock hits 00:00)
         if (Number(clock.minutes) === 0 && Number(clock.seconds) === 0) {
             console.log(`${resetTime}: series ends: ${series}`);
-            setEntries([newEntry, ...entries]);
+            let newArray = [newEntry, ...entries];
+            setEntries(newArray);
+            window.localStorage.setItem(
+                `${resetTime}min_entries`,
+                JSON.stringify(newArray)
+            );
         }
     }, [clock]);
 
@@ -109,6 +117,13 @@ const GameBody = (props) => {
                 />
             );
         });
+    };
+
+    const updateEntriesFromLocal = () => {
+        const localEntries = window.localStorage.getItem(
+            `${resetTime}min_entries`
+        );
+        if (localEntries) setEntries(JSON.parse(localEntries));
     };
 
     return (
