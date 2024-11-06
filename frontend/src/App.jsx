@@ -12,7 +12,7 @@ function App() {
     //functions
     const changeWindow = (num) => setCurrentWindow(num);
     return (
-        <div className="h-[100vh] w-[100vw] relative">
+        <div className="w-[100vw] relative">
             {/* <div className="rounded-b-[2.5rem] absolute top-0 left-0 right-0 bottom-[40vh] sm:bottom-[50vh] bg-primary-gradient -z-1"></div> */}
             <h1 className="text-center py-4 mb-4 text-white">COLOR-9 GAME</h1>
             <div className="flex items-center justify-center">

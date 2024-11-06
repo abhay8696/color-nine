@@ -16,12 +16,20 @@ import coin_7 from "../../assets/coin7.png";
 import coin_8 from "../../assets/coin8.png";
 import coin_9 from "../../assets/coin9.png";
 import NoClickLayer from "../NoClickLayer/NoClickLayer";
+import EntryComp from "../EntryComp/EntryComp";
 
 const GameBody = (props) => {
     const { currentWindow, resetTime } = props; //currentWindow = 1/3/5
 
     const [clock, setClock] = useState(getCountDown(resetTime));
     const [series, setSeries] = useState(getSeries(resetTime));
+    const [newEntry, setNewEntry] = useState({
+        series: "",
+        color: "",
+        bigSmall: "",
+        num: "",
+        resetTime,
+    });
 
     //variables
     const hideorShow = useRef("hidden");
@@ -113,6 +121,37 @@ const GameBody = (props) => {
                         Small
                     </span>
                 </div>
+            </div>
+            <div className="text-black rounded-xl px-4 py-2 mx-auto max-w-[500px] bg-white w-[95vw] mb-4">
+                <EntryComp
+                    series={"series"}
+                    num={"number"}
+                    color={"color"}
+                    bigSmall={"big-small"}
+                    tableHead={true}
+                    customClass="text-sm md:text-md"
+                />
+                <div className="border-b border-red-100"></div>
+                <EntryComp
+                    series={2024110411216}
+                    num={5}
+                    color={"red"}
+                    bigSmall={"big"}
+                />
+                <div className="border-b border-red-100"></div>
+                <EntryComp
+                    series={2024110411216}
+                    num={5}
+                    color={"green"}
+                    bigSmall={"big"}
+                />
+                <div className="border-b border-red-100"></div>
+                <EntryComp
+                    series={2024110411216}
+                    num={1}
+                    color={"violet"}
+                    bigSmall={"small"}
+                />
             </div>
         </div>
     );
