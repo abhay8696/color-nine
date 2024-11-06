@@ -30,6 +30,7 @@ const GameBody = (props) => {
         num: "",
         resetTime,
     });
+    const [entries, setEntries] = useState([]);
 
     //variables
     const hideorShow = useRef("hidden");
@@ -55,6 +56,11 @@ const GameBody = (props) => {
         ) {
             updateSeries();
         }
+        //when series end (clock hits 00:00)
+        if (Number(clock.minutes) === 0 && Number(clock.seconds) === 0) {
+            console.log(`${resetTime}: series ends: ${series}`);
+            setEntries([newEntry, ...entries]);
+        }
     }, [clock]);
 
     useEffect(() => {
@@ -64,7 +70,7 @@ const GameBody = (props) => {
 
     useEffect(() => {
         const ro = generateRandom();
-        console.log({ resetTime, series, ...ro });
+        setNewEntry({ resetTime, series, ...ro });
     }, [series]);
 
     //functions
@@ -88,6 +94,21 @@ const GameBody = (props) => {
         });
 
         return arr;
+    };
+
+    const displayEntries = () => {
+        return entries.map((entry) => {
+            const { series, color, bigSmall, num, resetTime } = entry;
+            return (
+                <EntryComp
+                    series={series}
+                    num={num}
+                    color={color}
+                    bigSmall={bigSmall}
+                    customClass={"border-t border-red-100"}
+                />
+            );
+        });
     };
 
     return (
@@ -131,27 +152,7 @@ const GameBody = (props) => {
                     tableHead={true}
                     customClass="text-sm md:text-md"
                 />
-                <div className="border-b border-red-100"></div>
-                <EntryComp
-                    series={2024110411216}
-                    num={5}
-                    color={"red"}
-                    bigSmall={"big"}
-                />
-                <div className="border-b border-red-100"></div>
-                <EntryComp
-                    series={2024110411216}
-                    num={5}
-                    color={"green"}
-                    bigSmall={"big"}
-                />
-                <div className="border-b border-red-100"></div>
-                <EntryComp
-                    series={2024110411216}
-                    num={1}
-                    color={"violet"}
-                    bigSmall={"small"}
-                />
+                {displayEntries()}
             </div>
         </div>
     );

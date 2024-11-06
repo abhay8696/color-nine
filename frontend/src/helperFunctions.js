@@ -125,7 +125,7 @@ export const generateRandom = () => {
 
     switch (num) {
         case 0:
-            color = "red-violet";
+            color = "violet";
             break;
         case 1:
             color = "green";
@@ -140,7 +140,7 @@ export const generateRandom = () => {
             color = "red";
             break;
         case 5:
-            color = "green-violet";
+            color = "violet";
             break;
         case 6:
             color = "red";
