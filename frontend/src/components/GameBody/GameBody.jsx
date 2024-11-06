@@ -42,7 +42,7 @@ const GameBody = (props) => {
     //side effects
     useEffect(() => {
         //load entries from local on 1st reload
-        // updateEntriesFromLocal();
+        updateEntriesFromLocal();
 
         const intervalId_sec = setInterval(() => {
             updateClock();
